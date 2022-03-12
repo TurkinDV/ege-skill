@@ -1,0 +1,10 @@
+FROM maven:3.6.3-openjdk-17 as builds
+WORKDIR /app
+COPY / /app
+RUN mvn install -DskipTests
+
+FROM maven:3.6.3-openjdk-17
+WORKDIR /app
+COPY --from=builds /app/target/resultService-0.0.1-SNAPSHOT.jar /app/resultService-0.0.1-SNAPSHOT.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "resultService-0.0.1-SNAPSHOT.jar"]

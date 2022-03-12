@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=result_service
+      - POSTGRES_PASSWORD=result_service
+  app:
+    image: app:1
+    restart: always
+    build:
+      context: ./
+      dockerfile: DockerfIle
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
