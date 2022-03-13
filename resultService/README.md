@@ -14,7 +14,8 @@
 - Java
 - Spring
 - Maven
-- Mocito
+- Mockito
+- JUnit
 - PostgreSQL
 
 ## TODO
