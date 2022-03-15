@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    restart: always
+    env_file: "conf/exam_service.env"
+#    volumes:
+#      - "pgdata:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+
+  web:
+    image: web:1
+    restart: always
+    command: "poetry run python manage.py runserver 0.0.0.0:8080"
+    links:
+      - db:db
+    build: .
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
