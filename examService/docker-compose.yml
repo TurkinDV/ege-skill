@@ -5,19 +5,25 @@ services:
     image: postgres
     restart: always
     env_file: "conf/exam_service.env"
-#    volumes:
-#      - "pgdata:/var/lib/postgresql/data"
+    volumes:
+      - "pgdata:/var/lib/postgresql/data"
     ports:
       - "5432:5432"
 
   web:
     image: web:1
     restart: always
-    command: "poetry run python manage.py runserver 0.0.0.0:8080"
+    command: >
+      sh -c "poetry run python manage.py migrate && poetry run ./manage.py makemigrations exam && poetry run ./manage.py migrate exam && poetry run python manage.py runserver 0.0.0.0:8080"
     links:
       - db:db
     build: .
+    volumes:
+      - .:/usr/src/
     ports:
       - 8080:8080
     depends_on:
       - db
+
+volumes:
+  pgdata:

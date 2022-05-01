@@ -6,12 +6,12 @@ authors = ["TurkinDV <dmitry_turkin@mail.ru>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-Django = "^4.0.3"
+Django = "^3.2.10"
 django-rest-framework = "^0.1.0"
 pytest = "^7.1.0"
 drf-yasg = "^1.20.0"
 psycopg2 = "^2.9.3"
-django-markdown = "^0.8.4"
+django-ckeditor = "^6.2.0"
 
 [tool.poetry.dev-dependencies]
 
